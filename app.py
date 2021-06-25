@@ -1,11 +1,10 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request, session
 from authlib.integrations.flask_client import OAuth
-
 app = Flask(__name__)
 
 oauth = OAuth(app)
 
-app.config['SECRET_KEY'] = "2KhyjBnh63iVtvijRVBuspKh"
+app.config['SECRET_KEY'] = "super"
 app.config['GOOGLE_CLIENT_ID'] = "1055422963219-vif63bofkmidos35lr8ijh94200a4m3b.apps.googleusercontent.com"
 app.config['GOOGLE_CLIENT_SECRET'] = "2KhyjBnh63iVtvijRVBuspKh"
 
@@ -27,7 +26,8 @@ google = oauth.register(
 # Default route
 @app.route('/')
 def index():
-  return render_template('index.html')
+    session['islogged'] = False
+    return render_template('index.html')
 
 
 # Google login route
@@ -41,30 +41,41 @@ def google_login():
 # Google authorize route
 @app.route('/login/google/authorize')
 def google_authorize():
-    google = oauth.create_client('google')
-    token = google.authorize_access_token()
-    resp = google.get('userinfo').json()
-    print(f"\n{resp}\n")
-    return "You are successfully signed in using google"
+    try:
+        google = oauth.create_client('google')
+        token = google.authorize_access_token()
+        resp = google.get('userinfo').json()
+        session['islogged'] = True
+        session['username'] = resp['name']
+        print(f"\n{resp}\n")
+        return redirect(url_for('home'))
+    except:
+        session['islogged'] = False
+        return redirect(url_for('index'))
 
 
-# Github login route
-@app.route('/login/github')
-def github_login():
-    github = oauth.create_client('github')
-    redirect_uri = url_for('github_authorize', _external=True)
-    return github.authorize_redirect(redirect_uri)
+@app.route('/home')
+def home():
+    return render_template('First_page.html', name = session['username'])
 
 
-# Github authorize route
-@app.route('/login/github/authorize')
-def github_authorize():
-    github = oauth.create_client('github')
-    token = github.authorize_access_token()
-    resp = github.get('user').json()
-    print(f"\n{resp}\n")
-    session['']
-    return "You are successfully signed in using github"
+@app.route('/staticfeed/', methods=['POST'])
+def Staticfeed():
+    if session['islogged']:
+        if request.form['Static Feed']=="static":
+            username = session['username']
+            return render_template('static.html', name=username)
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/livefeed/', methods=['POST'])
+def Livefeed():
+    if session['islogged']:
+        if request.form['Live Feed']=="live":
+            return render_template('live.html')
+    else:
+        return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
