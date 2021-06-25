@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 oauth = OAuth(app)
 
-app.config['SECRET_KEY'] = "2KhyjBnh63iVtvijRVBuspKh"
-app.config['GOOGLE_CLIENT_ID'] = "1055422963219-vif63bofkmidos35lr8ijh94200a4m3b.apps.googleusercontent.com"
+app.config['SECRET_KEY'] = "[key]"
+app.config['GOOGLE_CLIENT_ID'] = "[id]"
 app.config['GOOGLE_CLIENT_SECRET'] = "2KhyjBnh63iVtvijRVBuspKh"
 
 google = oauth.register(
