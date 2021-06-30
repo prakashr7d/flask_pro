@@ -1,4 +1,5 @@
-from flask import Flask, render_template, url_for, redirect, request, session
+from flask import Flask, render_template, url_for, redirect, request, session, Response
+from camera import VideoCamera
 from authlib.integrations.flask_client import OAuth
 application = Flask(__name__)
 
@@ -20,7 +21,13 @@ google = oauth.register(
     userinfo_endpoint = 'https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     client_kwargs = {'scope': 'openid email profile'},
 )
+def gen(camera):
+    while True:
+        data= camera.get_frame()
 
+        frame=data[0]
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
 # Default route
@@ -76,8 +83,7 @@ def Staticfeed():
 def Livefeed():
     if session['islogged']:
         if request.form['Live Feed']=="live":
-            username = session['username']
-            return render_template('live.html', name=username)
+            return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
     else:
         return redirect(url_for('index'))
 
