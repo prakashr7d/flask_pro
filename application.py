@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, redirect, request, session, Response
 from camera import VideoCamera
 from authlib.integrations.flask_client import OAuth
+import cv2
+
 application = Flask(__name__)
 
 oauth = OAuth(application)
