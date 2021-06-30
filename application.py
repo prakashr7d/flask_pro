@@ -76,6 +76,7 @@ def Staticfeed():
 def Livefeed():
     if session['islogged']:
         if request.form['Live Feed']=="live":
+            username = session['username']
             return render_template('live.html', name=username)
     else:
         return redirect(url_for('index'))
