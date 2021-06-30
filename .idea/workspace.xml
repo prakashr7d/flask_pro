@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="055b7f19-9968-47d1-a2d2-8e9bba7db46d" name="Default Changelist" comment="host">
-      <change afterPath="$PROJECT_DIR$/camera.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
@@ -40,7 +39,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SmoothStream" />
   </component>
   <component name="RunManager" selected="JavaScript Debug.live.html">
     <configuration name="live.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Flask-Series/templates/live.html" useBuiltInWebServerPort="true">
@@ -131,7 +130,7 @@
       <workItem from="1624634117046" duration="12361000" />
       <workItem from="1624687283472" duration="15000" />
       <workItem from="1625064368760" duration="138000" />
-      <workItem from="1625064549980" duration="6605000" />
+      <workItem from="1625064549980" duration="7797000" />
     </task>
     <task id="LOCAL-00001" summary="Completed">
       <created>1624636686863</created>
@@ -196,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625066811723</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="host">
+      <created>1625071954776</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1625071954776</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

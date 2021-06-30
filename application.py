@@ -21,13 +21,22 @@ google = oauth.register(
     userinfo_endpoint = 'https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     client_kwargs = {'scope': 'openid email profile'},
 )
-def gen(camera):
-    while True:
-        data= camera.get_frame()
+camera = cv2.VideoCapture(0)
 
-        frame=data[0]
+
+def generate_frames():
+    while True:
+
+        ## read the camera frame
+        success, frame = camera.read()
+        if not success:
+            break
+        else:
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
 # Default route
