@@ -91,13 +91,15 @@ def Staticfeed():
 
 
 @application.route('/livefeed/', methods=['POST'])
-def Livefeed():
+def live():
     if session['islogged']:
         if request.form['Live Feed']=="live":
-            return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+            return render_template('live.html')
     else:
         return redirect(url_for('index'))
-
+@application.route('/feed/')
+def Livefeed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
   application.run(debug=True, host='0.0.0.0', port=80)
