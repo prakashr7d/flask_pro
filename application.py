@@ -94,7 +94,7 @@ def Staticfeed():
 def Livefeed():
     if session['islogged']:
         if request.form['Live Feed']=="live":
-            return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+            return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
     else:
         return redirect(url_for('index'))
 
