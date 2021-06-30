@@ -24,20 +24,6 @@
     <h1> Hello! {{name}}</h1>
     <h4> Webcam Feed </h4>
     <p> My ugly mug LIVE! </p>
-    <video autoplay="true" id="videoElement">
-    </video>
-  <script>
-    var video = document.querySelector("#videoElement");
-
-    if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-        video.srcObject = stream;
-        })
-        .catch(function (error) {
-        console.log("Something went wrong!");
-        });
-    }
-  </script>
+   <img src="{{ url_for('Livefeed') }}" width="50%">
   </div>
   </body>
